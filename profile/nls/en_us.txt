@@ -1,0 +1,83 @@
+# YeeLight Controller
+ND-YEECTRL-NAME = YeeLight Controller
+ND-YEECTRL-ICON = GenericCtl
+CMD-CTRL-DISCOVER-NAME = Re-Discover
+ST-CTRL-ST-NAME = NodeServer Online
+
+# YeeLight Bulb
+ND-YEEBULB-NAME = Yeelight Bulb
+ND-YEEBULB-ICON = Lamp
+ST-YEECL-ST-NAME = Status
+ST-YEECL-CLITEMP-NAME = Color Temperature
+ST-YEECL-RR-NAME = Transition Time
+ST-YEECL-GPV-NAME = Color Mode
+ST-YEECL-GV0-NAME = Hue
+ST-YEECL-GV1-NAME = Saturation
+ST-YEECL-GV2-NAME = Brightness
+ST-YEECL-GV3-NAME = Red
+ST-YEECL-GV4-NAME = Green
+ST-YEECL-GV5-NAME = Blue
+ST-YEECL-GV6-NAME = Music Mode
+
+CMD-YEECL-QUERY-NAME = Query
+CMD-YEECL-DON-NAME = On
+CMD-YEECL-DOF-NAME = Off
+CMD-YEECL-DFON-NAME = Fast On
+CMD-YEECL-DFOF-NAME = Fast Off
+CMD-YEECL-BRT-NAME = Brighten
+CMD-YEECL-DIM-NAME = Dim
+CMD-YEECL-FDUP-NAME = Fade Up
+CMD-YEECL-FDDOWN-NAME = Fade Down
+CMD-YEECL-FDSTOP-NAME = Fade Stop
+CMD-YEECL-SET_COLOR_RGB-NAME = Set RGB Color
+CMD-YEECL-CLITEMP-NAME = Set Color Temperature
+CMD-YEECL-SET_CTBR-NAME = Set Temp and Brightness
+CMD-YEECL-SET_HSB-NAME = Set Temperature
+CMD-YEECL-RR-NAME = Set Transition Time
+CMD-YEECL-SET_COLOR-NAME = Set Color
+CMD-YEECL-SET_HUE-NAME = Set Hue
+CMD-YEECL-SET_SAT-NAME = Set Saturation
+CMD-YEECL-SET_BRI-NAME = Set Brightness
+
+CMDP-R-NAME = Red
+CMDP-G-NAME = Green
+CMDP-B-NAME = Blue
+CMDP-BR-NAME = Brightness
+CMDP-K-NAME = Kelvin
+CMDP-H-NAME = Hue
+CMDP-S-NAME = Saturation
+CMDP-D-NAME = Duration
+
+COLOR_MODE-1 = RGB
+COLOR_MODE-2 = Temperature
+COLOR_MODE-3 = HSV
+
+COLOR_SEL-0 = Aqua
+COLOR_SEL-1 = Azure
+COLOR_SEL-2 = Beige
+COLOR_SEL-3 = Blue
+COLOR_SEL-4 = Chartreuse
+COLOR_SEL-5 = Coral
+COLOR_SEL-6 = Crimson
+COLOR_SEL-7 = Forest Green
+COLOR_SEL-8 = Fuchsia
+COLOR_SEL-9 = Golden
+COLOR_SEL-10 = Gray
+COLOR_SEL-11 = Green
+COLOR_SEL-12 = Hot Pink
+COLOR_SEL-13 = Indigo
+COLOR_SEL-14 = Lavender
+COLOR_SEL-15 = Lime
+COLOR_SEL-16 = Maroon
+COLOR_SEL-17 = Navy Blue
+COLOR_SEL-18 = Olive
+COLOR_SEL-19 = Red
+COLOR_SEL-20 = Royal Blue
+COLOR_SEL-21 = Tan
+COLOR_SEL-22 = Teal
+COLOR_SEL-23 = White
+
+
+PGM-CMD-SET_COLOR_RGB-FMT = /R// Red ${v}/ /G// Green ${v}/ /B// Blue ${v}/ /BR// Brightness ${v}/ /D// in ${v}/
+PGM-CMD-SET_HSB-FMT = /H// Hue ${v}/ /S// Saturation ${v}/ /BR// Brightness ${v}/ /D// in ${v}/
+PGM-CMD-SET_CTBR-FMT =  /K// Color Temperature ${v}/ /BR// Brightness ${v}/ /D// in ${v}/

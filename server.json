@@ -1,0 +1,21 @@
+{
+    "name": "Yeelight",
+    "docs": "https://github.com/exking/udi-yee-poly",
+    "type": "python3",
+    "executable": "yee-poly.py",
+    "install": "install.sh",
+    "description": "Yeelight bulb Control",
+    "notice": "",
+    "shortPoll": "15",
+    "longPoll": "600",
+    "credits": [
+        {
+            "title": "NodeServer to integrate with Yeelight bulbs",
+            "author": "xKing",
+            "version": "0.0.1",
+            "date": "Jan 16, 2019",
+            "source": "https://github.com/exking/udi-yee-poly",
+            "license": "https://raw.githubusercontent.com/exking/udi-yee-poly/master/LICENSE"
+        }
+    ]
+}

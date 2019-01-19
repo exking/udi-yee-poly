@@ -1,0 +1,84 @@
+<nodeDefs>
+    <nodeDef id="YEECTRL" nls="CTRL">
+        <editors />
+        <sts>
+            <st id="ST" editor="BOOL" />
+        </sts>
+        <cmds>
+            <sends />
+            <accepts>
+                <cmd id="DISCOVER" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+    <nodeDef id="YEEBULB" nls="YEECL">
+        <editors />
+        <sts>
+            <st id="ST" editor="PERCENT" />
+            <st id="CLITEMP" editor="KELV" />
+            <st id="GPV" editor="CLRMODE" />
+            <st id="GV0" editor="HUE" />
+            <st id="GV1" editor="SAT" /> <!-- SAT -->
+            <st id="GV2" editor="BRT" /> <!-- BR -->
+            <st id="GV3" editor="RGB" /> <!-- RED -->
+            <st id="GV4" editor="RGB" /> <!-- GREEN -->            
+            <st id="GV5" editor="RGB" /> <!-- BLUE -->            
+            <st id="GV6" editor="BOOL" /> <!-- Music mode -->
+            <st id="RR" editor="DURATION" /> <!-- Music mode -->
+        </sts>
+        <cmds>
+            <sends>
+                <cmd id="DON" />
+                <cmd id="DOF" />
+            </sends>
+            <accepts>
+                <cmd id="DON" />
+                <cmd id="DOF" />
+                <cmd id="DFON" />
+                <cmd id="DFOF" />
+                <cmd id="BRT" />
+                <cmd id="DIM" />
+                <cmd id="FDUP" />
+                <cmd id="FDDOWN" />
+                <cmd id="FDSTOP" />
+                <cmd id="QUERY" />
+                <cmd id="SET_COLOR">
+                    <p id="" editor="COLORS" />
+                </cmd>
+                <cmd id="SET_HUE">
+                    <p id="" editor="HUE" init="GV0" />
+                </cmd>
+                <cmd id="SET_SAT">
+                    <p id="" editor="SAT" init="GV1" />
+                </cmd>
+                <cmd id="SET_BRI">
+                    <p id="" editor="BRT" init="GV2" />
+                </cmd>
+                <cmd id="SET_COLOR_RGB">
+                    <p id="R" editor="RGB" init="GV3" />
+                    <p id="G" editor="RGB" init="GV4" />
+                    <p id="B" editor="RGB" init="GV5" />
+                    <p id="BR" editor="BRT" init="GV2" />
+                    <p id="D" editor="DURATION" init="RR" />
+                </cmd>
+                <cmd id="CLITEMP">
+                    <p id="" editor="KELV" init="CLITEMP" />
+                </cmd>
+                <cmd id="SET_CTBR">
+                    <p id="K" editor="KELV" init="CLITEMP" />
+                    <p id="BR" editor="BRT" init="GV2" />
+                    <p id="D" editor="DURATION" init="RR" />
+                </cmd>
+                <cmd id="SET_HSB">
+                    <p id="H" editor="HUE" init="GV0" />
+                    <p id="S" editor="SAT" init="GV1" />
+                    <p id="BR" editor="BRT" init="GV2" />
+                    <p id="D" editor="DURATION" init="RR" />
+                </cmd>
+                <cmd id="RR">
+                    <p id="" editor="DURATION" init="RR" />
+                </cmd>
+            </accepts>
+        </cmds>
+    </nodeDef>
+</nodeDefs>

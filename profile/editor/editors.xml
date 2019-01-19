@@ -1,0 +1,32 @@
+<editors>
+    <editor id="BOOL">
+        <range uom="2" subset="0,1" />
+    </editor>
+    <editor id="PERCENT">
+        <range uom="51" min="0" max="100" prec="0" />
+    </editor>
+    <editor id="CLRMODE">
+        <range uom="25" subset="1-3" nls="COLOR_MODE" />
+    </editor>
+    <editor id="HUE">
+        <range uom="56" min="0" max="359" prec="0" step="1" />
+    </editor>
+    <editor id="BRT">
+        <range uom="100" min="1" max="100" prec="0" step="1" />
+    </editor>
+    <editor id="SAT">
+        <range uom="100" min="0" max="100" prec="0" step="1" />
+    </editor>
+    <editor id="RGB">
+        <range uom="100" min="0" max="255" prec="0" step="1" />
+    </editor>
+    <editor id="KELV">
+        <range uom="26" min="1700" max="6500" prec="0" step="1" />
+    </editor>
+    <editor id="DURATION">
+        <range uom="42" min="30" max="540000" prec="0" step="10" />
+    </editor>
+    <editor id="COLORS">
+        <range uom="25" min="0" max="23" nls="COLOR_SEL" />
+    </editor>
+</editors>
