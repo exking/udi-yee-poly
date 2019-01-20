@@ -13,7 +13,7 @@ cd Yeelight
 ./install.sh
 ```
 ### Configuration
-None so far
+Make sure to enable `LAN Control` for the bulbs in Yeelight app.
 
 ### Notes
 Please report any problems on the UDI user forum.
