@@ -7,8 +7,11 @@ from yeelight import discover_bulbs, Bulb
 LOGGER = polyinterface.LOGGER
 
 DEF_BRMAX = 100
+DEF_BRMIN = 1
 DEF_DURATION = 300
 DEF_MIN_DURATION = 30
+DEF_INCREMENT = 4
+FADE_TRANSTIME = 4000
 
 """ Common color names and their RGB values. """
 colors = {
@@ -80,6 +83,7 @@ class Controller(polyinterface.Controller):
             LOGGER.info("Using manually specified device list")
         else:
             for bulb_info in discover_bulbs():
+                LOGGER.debug(bulb_info)
                 address = str(bulb_info['capabilities']['id'])[-14:]
                 bulb = Bulb(bulb_info['ip'])
                 bulb_properties = bulb.get_properties()
@@ -306,6 +310,58 @@ class YeeColorBulb(polyinterface.Node):
         self.setDriver('GV2', self.bri)
         self.setDriver('ST', self.bri)
 
+    def brt_dim(self, command):
+        cmd = command.get('cmd')
+        if cmd == 'BRT':
+            if not self.power:
+                self._power_on(trans=DEF_MIN_DURATION)
+            new_bri = self.bri + DEF_INCREMENT
+        elif cmd == 'DIM':
+            new_bri = self.bri - DEF_INCREMENT
+        if new_bri < DEF_BRMIN:
+            new_bri = DEF_BRMIN
+        elif new_bri > DEF_BRMAX:
+            new_bri = DEF_BRMAX
+        if new_bri == self.bri:
+            LOGGER.error('{} can\'t {}, brightness is currently {}'.format(self.name, cmd, self.bri))
+            return
+        self.bri = new_bri
+        try:
+            self.bulb.set_brightness(self.bri, duration=self.duration)
+        except Exception as ex:
+            LOGGER.error('Bulb {} failed to set brightness {}'.format(self.name, ex))
+            return
+        self.setDriver('GV2', self.bri)
+        self.setDriver('ST', self.bri)
+
+    def fade(self, command):
+        cmd = command.get('cmd')
+        trans = FADE_TRANSTIME
+        if not self.power:
+            if cmd != 'FDUP':
+                LOGGER.error('{} is OFF, can\'t {}'.format(self.name, cmd))
+                return
+            self._power_on(trans=DEF_MIN_DURATION)
+        if cmd == 'FDUP':
+            new_bri = DEF_BRMAX
+        elif cmd == 'FDDOWN':
+            new_bri = DEF_BRMIN
+        elif cmd == 'FDSTOP':
+            self.updateInfo()
+            new_bri = self.bri
+            trans = DEF_MIN_DURATION
+        else:
+            LOGGER.error('Invalid command {} to fade'.format(cmd))
+            return
+        self.bri = new_bri
+        try:
+            self.bulb.set_brightness(self.bri, duration=trans)
+        except Exception as ex:
+            LOGGER.error('Bulb {} failed to set brightness {}'.format(self.name, ex))
+            return
+        self.setDriver('GV2', self.bri)
+        self.setDriver('ST', self.bri)
+
 
     drivers = [{'driver': 'ST', 'value': 0, 'uom': 51},
                {'driver': 'CLITEMP', 'value': 0, 'uom': 26},
@@ -324,7 +380,8 @@ class YeeColorBulb(polyinterface.Node):
 
     commands = {
             'QUERY': query, 'DON': set_on, 'DOF': set_off, 'DFON': set_on, 'DFOF': set_off, 'RR': set_transition, 'CLITEMP': set_colortemp, 'SET_COLOR_RGB': set_rgb,
-            'SET_COLOR': set_color, 'SET_HSB': set_hsv, 'SET_CTBR': set_colortemp, 'SET_HUE': set_hsv, 'SET_SAT': set_hsv, 'SET_BRI': set_hsv
+            'SET_COLOR': set_color, 'SET_HSB': set_hsv, 'SET_CTBR': set_colortemp, 'SET_HUE': set_hsv, 'SET_SAT': set_hsv, 'SET_BRI': set_hsv, 'BRT': brt_dim, 'DIM': brt_dim,
+            'FDUP': fade, 'FDDOWN': fade, 'FDSTOP': fade
                }
 
 
