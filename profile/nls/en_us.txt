@@ -38,6 +38,7 @@ CMD-YEECL-SET_COLOR-NAME = Set Color
 CMD-YEECL-SET_HUE-NAME = Set Hue
 CMD-YEECL-SET_SAT-NAME = Set Saturation
 CMD-YEECL-SET_BRI-NAME = Set Brightness
+CMD-YEECL-EFFECT-NAME = Set Effect
 
 CMDP-R-NAME = Red
 CMDP-G-NAME = Green
@@ -77,6 +78,19 @@ COLOR_SEL-21 = Tan
 COLOR_SEL-22 = Teal
 COLOR_SEL-23 = White
 
+EFFECT_SEL-0 = None
+EFFECT_SEL-1 = Disco
+EFFECT_SEL-2 = Slow Temp
+EFFECT_SEL-3 = Strobe epilepsy!
+EFFECT_SEL-4 = Strobe color
+EFFECT_SEL-5 = Alarm
+EFFECT_SEL-6 = Police
+EFFECT_SEL-7 = Police2
+EFFECT_SEL-8 = Christmas
+EFFECT_SEL-9 = RGB
+EFFECT_SEL-10 = Random Loop
+EFFECT_SEL-11 = LSD
+EFFECT_SEL-12 = Slowdown
 
 PGM-CMD-SET_COLOR_RGB-FMT = /R// Red ${v}/ /G// Green ${v}/ /B// Blue ${v}/ /BR// Brightness ${v}/ /D// in ${v}/
 PGM-CMD-SET_HSB-FMT = /H// Hue ${v}/ /S// Saturation ${v}/ /BR// Brightness ${v}/ /D// in ${v}/

@@ -78,6 +78,9 @@
                 <cmd id="RR">
                     <p id="" editor="DURATION" init="RR" />
                 </cmd>
+                <cmd id="EFFECT">
+                    <p id="" editor="EFFECTS" />
+                </cmd>
             </accepts>
         </cmds>
     </nodeDef>

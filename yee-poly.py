@@ -2,7 +2,8 @@
 
 import polyinterface
 import sys
-from yeelight import discover_bulbs, Bulb
+from yeelight import discover_bulbs, Bulb, RGBTransition, SleepTransition, Flow, BulbException
+from yeelight.transitions import disco, temp, strobe, pulse, strobe_color, alarm, police, police2, christmas, rgb, randomloop, lsd, slowdown
 
 LOGGER = polyinterface.LOGGER
 
@@ -12,6 +13,7 @@ DEF_DURATION = 300
 DEF_MIN_DURATION = 30
 DEF_INCREMENT = 4
 FADE_TRANSTIME = 4000
+EFFECT_MAP = [ disco, temp, strobe, strobe_color, alarm, police, police2, christmas, rgb, randomloop, lsd, slowdown ]
 
 """ Common color names and their RGB values. """
 colors = {
@@ -204,7 +206,7 @@ class YeeColorBulb(polyinterface.Node):
             trans = self.duration
         if not self.power:
             try:
-                self.bulb.turn_on(trans)
+                self.bulb.turn_on(duration=trans)
             except Exception as ax:
                 LOGGER.error('Bulb {} failed to turn on {}'.format(self.name, ex))
                 return
@@ -362,6 +364,30 @@ class YeeColorBulb(polyinterface.Node):
         self.setDriver('GV2', self.bri)
         self.setDriver('ST', self.bri)
 
+    def set_effect(self, command):
+        val = int(command.get('value'))
+        if val < 0 or val > 12:
+            LOGGER.error('Invalid effect number {}'.format(val))
+            return
+        if val > 0:
+            LOGGER.debug('{} starting effect {}'.format(self.name, val-1))
+        if not self.power:
+            if val == 0:
+                LOGGER.error('{} is off, can\'t stop the effect'.format(self.name))
+            self._power_on()
+        if val == 0:
+            LOGGER.info('{} stopping effect'.format(self.name))
+            try:
+                self.bulb.stop_flow()
+            except Exception as ex:
+                LOGGER.error('{} failed to stop effect {}'.format(self.name, ex))
+            return
+        flow = Flow(count=0, transitions=EFFECT_MAP[val-1]())
+        try:
+            self.bulb.start_flow(flow)
+        except Exception as ex:
+            LOGGER.error('{} failed to start effect {}'.format(self.name, ex))
+
 
     drivers = [{'driver': 'ST', 'value': 0, 'uom': 51},
                {'driver': 'CLITEMP', 'value': 0, 'uom': 26},
@@ -381,7 +407,7 @@ class YeeColorBulb(polyinterface.Node):
     commands = {
             'QUERY': query, 'DON': set_on, 'DOF': set_off, 'DFON': set_on, 'DFOF': set_off, 'RR': set_transition, 'CLITEMP': set_colortemp, 'SET_COLOR_RGB': set_rgb,
             'SET_COLOR': set_color, 'SET_HSB': set_hsv, 'SET_CTBR': set_colortemp, 'SET_HUE': set_hsv, 'SET_SAT': set_hsv, 'SET_BRI': set_hsv, 'BRT': brt_dim, 'DIM': brt_dim,
-            'FDUP': fade, 'FDDOWN': fade, 'FDSTOP': fade
+            'FDUP': fade, 'FDDOWN': fade, 'FDSTOP': fade, 'EFFECT': set_effect
                }
 
 
