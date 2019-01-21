@@ -2,6 +2,7 @@
 
 import polyinterface
 import sys
+import json
 from yeelight import discover_bulbs, Bulb, RGBTransition, SleepTransition, Flow, BulbException
 from yeelight.transitions import disco, temp, strobe, pulse, strobe_color, alarm, police, police2, christmas, rgb, randomloop, lsd, slowdown
 
@@ -83,6 +84,17 @@ class Controller(polyinterface.Controller):
     def discover(self, command=None):
         if self.devlist:
             LOGGER.info("Using manually specified device list")
+            for bulb_info in self.devlist:
+                LOGGER.debug(bulb_info)
+                address = bulb_info['address'][:14]
+                bulb = Bulb(bulb_info['ip'])
+                bulb_properties = bulb.get_properties()
+                name = bulb_info['name']
+                if name is None:
+                    name = 'YeeLight ' + address[10:14]
+                if not address in self.nodes:
+                    LOGGER.info('Adding YeeLight bulb id: {}, name: {}'.format(address, name))
+                    self.addNode(YeeColorBulb(self, self.address, address, name, bulb))
         else:
             for bulb_info in discover_bulbs():
                 LOGGER.debug(bulb_info)
