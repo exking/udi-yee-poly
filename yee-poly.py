@@ -89,10 +89,10 @@ class Controller(polyinterface.Controller):
                 address = bulb_info['address'][:14]
                 try:
                     bulb = Bulb(bulb_info['ip'])
+                    bulb_properties = bulb.get_properties()
                 except Exception as ex:
                     LOGGER.error('Failed to connect to the bulb at {} {}'.format(bulb_info['ip'], ex))
                     continue
-                bulb_properties = bulb.get_properties()
                 name = bulb_info['name']
                 if name is None:
                     name = 'YeeLight ' + address[10:14]
@@ -105,10 +105,10 @@ class Controller(polyinterface.Controller):
                 address = str(bulb_info['capabilities']['id'])[-14:]
                 try:
                     bulb = Bulb(bulb_info['ip'])
+                    bulb_properties = bulb.get_properties()
                 except Exception as ex:
                     LOGGER.error('Failed to connect to the bulb at {} {}'.format(bulb_info['ip'], ex))
                     continue
-                bulb_properties = bulb.get_properties()
                 name = bulb_properties['name']
                 if name is None:
                     name = 'YeeLight ' + address[10:14]
