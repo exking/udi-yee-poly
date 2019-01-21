@@ -87,7 +87,11 @@ class Controller(polyinterface.Controller):
             for bulb_info in self.devlist:
                 LOGGER.debug(bulb_info)
                 address = bulb_info['address'][:14]
-                bulb = Bulb(bulb_info['ip'])
+                try:
+                    bulb = Bulb(bulb_info['ip'])
+                except Exception as ex:
+                    LOGGER.error('Failed to connect to the bulb at {} {}'.format(bulb_info['ip'], ex))
+                    continue
                 bulb_properties = bulb.get_properties()
                 name = bulb_info['name']
                 if name is None:
@@ -99,7 +103,11 @@ class Controller(polyinterface.Controller):
             for bulb_info in discover_bulbs():
                 LOGGER.debug(bulb_info)
                 address = str(bulb_info['capabilities']['id'])[-14:]
-                bulb = Bulb(bulb_info['ip'])
+                try:
+                    bulb = Bulb(bulb_info['ip'])
+                except Exception as ex:
+                    LOGGER.error('Failed to connect to the bulb at {} {}'.format(bulb_info['ip'], ex))
+                    continue
                 bulb_properties = bulb.get_properties()
                 name = bulb_properties['name']
                 if name is None:
