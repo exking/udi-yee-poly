@@ -4,7 +4,7 @@ import polyinterface
 import sys
 import json
 from yeelight import discover_bulbs, Bulb, RGBTransition, SleepTransition, Flow, BulbException
-from yeelight.transitions import disco, temp, strobe, pulse, strobe_color, alarm, police, police2, christmas, rgb, randomloop, lsd, slowdown
+from yeelight.transitions import disco, temp, strobe, pulse, strobe_color, alarm, police, police2, christmas, rgb, random_loop, lsd, slowdown
 
 LOGGER = polyinterface.LOGGER
 
@@ -14,7 +14,7 @@ DEF_DURATION = 300
 DEF_MIN_DURATION = 30
 DEF_INCREMENT = 4
 FADE_TRANSTIME = 4000
-EFFECT_MAP = [ disco, temp, strobe, strobe_color, alarm, police, police2, christmas, rgb, randomloop, lsd, slowdown ]
+EFFECT_MAP = [ disco, temp, strobe, strobe_color, alarm, police, police2, christmas, rgb, random_loop, lsd, slowdown ]
 
 """ Common color names and their RGB values. """
 colors = {
